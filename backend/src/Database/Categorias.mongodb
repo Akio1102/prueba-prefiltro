@@ -1,0 +1,84 @@
+db.Categorias.insertMany([
+  {
+    nombre: "Laptops",
+    descripcion: "Computadoras portátiles para trabajar y jugar",
+  },
+  {
+    nombre: "Teléfonos Móviles",
+    descripcion: "Smartphones con tecnología de última generación",
+  },
+  {
+    nombre: "Televisores",
+    descripcion:
+      "Televisores de alta definición para entretenimiento en el hogar",
+  },
+  {
+    nombre: "Cámaras Digitales",
+    descripcion: "Cámaras para capturar momentos especiales",
+  },
+  {
+    nombre: "Auriculares Inalámbricos",
+    descripcion: "Auriculares para una experiencia auditiva inigualable",
+  },
+  {
+    nombre: "Tabletas",
+    descripcion: "Tabletas para la productividad y el entretenimiento",
+  },
+  {
+    nombre: "Consolas de Videojuegos",
+    descripcion: "Consolas para jugar videojuegos emocionantes",
+  },
+  {
+    nombre: "Electrodomésticos",
+    descripcion: "Electrodomésticos para simplificar la vida cotidiana",
+  },
+  {
+    nombre: "Ropa y Moda",
+    descripcion: "Moda y accesorios para vestir con estilo",
+  },
+  {
+    nombre: "Deportes y Aire Libre",
+    descripcion: "Equipamiento para actividades deportivas y al aire libre",
+  },
+  {
+    nombre: "Herramientas y Bricolaje",
+    descripcion:
+      "Herramientas para proyectos de bricolaje y mejoras en el hogar",
+  },
+  {
+    nombre: "Juguetes y Juegos",
+    descripcion: "Juguetes y juegos para todas las edades",
+  },
+  {
+    nombre: "Salud y Belleza",
+    descripcion: "Productos de cuidado personal y bienestar",
+  },
+  {
+    nombre: "Libros y Literatura",
+    descripcion: "Libros de todos los géneros para lectores ávidos",
+  },
+  {
+    nombre: "Arte y Artesanía",
+    descripcion: "Materiales para artistas y amantes de las manualidades",
+  },
+  {
+    nombre: "Instrumentos Musicales",
+    descripcion: "Instrumentos para músicos y aficionados",
+  },
+  {
+    nombre: "Electrónica de Consumo",
+    descripcion: "Dispositivos electrónicos para el uso diario",
+  },
+  {
+    nombre: "Joyería",
+    descripcion: "Joyas elegantes para ocasiones especiales",
+  },
+  {
+    nombre: "Muebles y Decoración",
+    descripcion: "Muebles y decoración para el hogar y la oficina",
+  },
+  {
+    nombre: "Viajes y Equipaje",
+    descripcion: "Equipaje y accesorios para viajes",
+  },
+]);

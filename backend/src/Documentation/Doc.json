@@ -1,0 +1,393 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API-Store",
+    "description": "Documentacion de la API-TechFlow",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9516/api",
+      "description": "Url de la API"
+    }
+  ],
+  "paths": {
+    "/Usuarios/All": {
+      "get": {
+        "summary": "Get All Usuarios",
+        "description": "Devuelve todos los Usuarios de la Store",
+        "tags": ["Usuarios"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Usuario"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontro el recurso solicitado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Usuarios/New": {
+      "post": {
+        "summary": "Create new Usuario",
+        "description": "Creacion de un nuevo Usuario",
+        "tags": ["Usuarios"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": { "msg": "Usuarios Creado Exitosamente" }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo crear el Periferico",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Usuarios/Update/{_id}": {
+      "patch": {
+        "summary": "Update Periferico",
+        "description": "Actualizacion de un Periferico en la base de datos",
+        "tags": ["Usuarios"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Usuario"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Periferico ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Usuario con ID:{id_de_ejemplo} Actualizado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Editar el Periferico",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Usuarios/Delete/{_id}": {
+      "delete": {
+        "summary": "Delete Periferico",
+        "description": "Un endpoint de prueba",
+        "tags": ["Usuarios"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Periferico ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Usuario con ID:{id_de_ejemplo} Eliminado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Eliminar el Periferico",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Categoria": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "651d52203ed714f7e6e37861",
+            "description": "ID único de la Categoria"
+          },
+          "nombre": {
+            "type": "string",
+            "example": "Laptops",
+            "description": "Nombre de la Categoria"
+          },
+          "descripcion": {
+            "type": "string",
+            "example": "Computadoras portátiles para trabajar y jugar",
+            "description": "Descripción de la Categoria"
+          }
+        }
+      },
+      "Comentario": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "651d557149456e2091a2958e",
+            "description": "ID único del Comentario"
+          },
+          "usuario": {
+            "type": "string",
+            "format": "uuid",
+            "example": "651d52302586b932b5088552",
+            "description": "ID Usuario del Comentario"
+          },
+          "producto": {
+            "type": "string",
+            "format": "uuid",
+            "example": "651d526c7fd5b5bdaf7edc35",
+            "description": "ID Producto del Comentario"
+          },
+          "texto": {
+            "type": "string",
+            "example": "Excelente Teclado Mecánico, funciona perfectamente.",
+            "description": "Texto del Comentario"
+          },
+          "calificacion": {
+            "type": "integer",
+            "example": 5,
+            "description": "Calificación del Comentario"
+          }
+        }
+      },
+      "Pedido": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "651d5c37e77c1ca90d3d1b36",
+            "description": "ID único del Pedido"
+          },
+          "usuario": {
+            "type": "string",
+            "format": "uuid",
+            "example": "651d52302586b932b5088552",
+            "description": "ID del Usuario que realizó el Pedido"
+          },
+          "productos": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productoId": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "651d526c7fd5b5bdaf7edc35",
+                  "description": "ID del Producto en el Pedido"
+                },
+                "cantidad": {
+                  "type": "integer",
+                  "example": 2,
+                  "description": "Cantidad del Producto en el Pedido"
+                }
+              }
+            },
+            "description": "Productos en el Pedido"
+          },
+          "total": {
+            "type": "number",
+            "format": "double",
+            "example": 209.91,
+            "description": "Total del Pedido"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2022-05-03T16:45:00Z",
+            "description": "Fecha en que se realizó el Pedido (en formato ISO 8601)"
+          },
+          "estado": {
+            "type": "string",
+            "example": "Entregado",
+            "description": "Estado actual del Pedido"
+          }
+        }
+      },
+      "Producto": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "651d526c7fd5b5bdaf7edc35",
+            "description": "ID único del Producto"
+          },
+          "nombre": {
+            "type": "string",
+            "example": "Teclado mecánico RGB",
+            "description": "Nombre del Producto"
+          },
+          "descripcion": {
+            "type": "string",
+            "example": "Teclado mecánico con retroiluminación RGB programable",
+            "description": "Descripción del Producto"
+          },
+          "categoria": {
+            "type": "string",
+            "example": "Teclados",
+            "description": "Categoría del Producto"
+          },
+          "precio": {
+            "type": "number",
+            "format": "double",
+            "example": 79.99,
+            "description": "Precio del Producto"
+          },
+          "stock": {
+            "type": "integer",
+            "example": 50,
+            "description": "Stock del Producto"
+          }
+        }
+      },
+      "Usuario": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "651d52302586b932b5088552",
+            "description": "ID único del Usuario"
+          },
+          "nombre": {
+            "type": "string",
+            "example": "Ana Pérez",
+            "description": "Nombre del Usuario"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "ana@email.com",
+            "description": "Email del Usuario"
+          },
+          "password": {
+            "type": "string",
+            "example": "123",
+            "description": "Password del Usuario"
+          },
+          "rol": {
+            "type": "string",
+            "example": "Cliente",
+            "description": "Rol del Usuario"
+          },
+          "telefono": {
+            "type": "string",
+            "example": "123-456-7890",
+            "description": "Número Telefónico del Usuario"
+          },
+          "direccion": {
+            "type": "string",
+            "example": "Calle 123, Ciudad",
+            "description": "Dirección del Usuario"
+          },
+          "fechaRegistro": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-10-03T10:00:00Z",
+            "description": "Fecha de Registro del Usuario"
+          }
+        }
+      }
+    }
+  }
+}

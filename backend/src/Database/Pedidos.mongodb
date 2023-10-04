@@ -1,0 +1,250 @@
+db.Pedidos.insertMany([
+  {
+    usuario: ObjectId("651d52302586b932b5088552"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc35"),
+        cantidad: 2,
+      },
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc36"),
+        cantidad: 1,
+      },
+    ],
+    total: 209.97,
+    fecha: ISODate("2022-05-03T16:45:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088552"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc35"),
+        cantidad: 3,
+      },
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc38"),
+        cantidad: 2,
+      },
+    ],
+    total: 499.95,
+    fecha: new Date(),
+    estado: "Pendiente",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088553"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc37"),
+        cantidad: 1,
+      },
+    ],
+    total: 299.99,
+    fecha: ISODate("2022-05-05T10:15:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088553"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc36"),
+        cantidad: 4,
+      },
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc3c"),
+        cantidad: 2,
+      },
+    ],
+    total: 599.94,
+    fecha: ISODate("2022-05-06T09:00:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088554"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc40"),
+        cantidad: 1,
+      },
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc3f"),
+        cantidad: 3,
+      },
+    ],
+    total: 709.96,
+    fecha: ISODate("2022-05-07T17:20:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088554"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc42"),
+        cantidad: 2,
+      },
+    ],
+    total: 39.98,
+    fecha: ISODate("2022-05-08T12:10:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088555"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc46"),
+        cantidad: 1,
+      },
+    ],
+    total: 149.99,
+    fecha: ISODate("2022-05-09T14:55:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088555"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc45"),
+        cantidad: 2,
+      },
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc48"),
+        cantidad: 1,
+      },
+    ],
+    total: 1119.97,
+    fecha: ISODate("2022-05-10T20:45:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088557"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc44"),
+        cantidad: 1,
+      },
+    ],
+    total: 12.99,
+    fecha: ISODate("2022-05-11T13:25:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088557"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc42"),
+        cantidad: 3,
+      },
+    ],
+    total: 59.97,
+    fecha: ISODate("2022-05-12T18:30:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088559"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc38"),
+        cantidad: 2,
+      },
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc3e"),
+        cantidad: 1,
+      },
+    ],
+    total: 509.97,
+    fecha: ISODate("2022-05-13T11:40:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b5088559"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc41"),
+        cantidad: 1,
+      },
+    ],
+    total: 39.99,
+    fecha: ISODate("2022-05-14T09:15:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b508855b"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc48"),
+        cantidad: 1,
+      },
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc47"),
+        cantidad: 2,
+      },
+    ],
+    total: 1139.97,
+    fecha: ISODate("2022-05-15T15:50:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b508855b"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc3e"),
+        cantidad: 1,
+      },
+    ],
+    total: 249.99,
+    fecha: ISODate("2022-05-16T17:00:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b508855c"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc46"),
+        cantidad: 2,
+      },
+    ],
+    total: 299.98,
+    fecha: ISODate("2022-05-17T19:30:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b508855c"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc43"),
+        cantidad: 3,
+      },
+    ],
+    total: 89.97,
+    fecha: ISODate("2022-05-18T10:05:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b508855f"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc35"),
+        cantidad: 1,
+      },
+    ],
+    total: 79.99,
+    fecha: ISODate("2022-05-19T14:20:00Z"),
+    estado: "Entregado",
+  },
+  {
+    usuario: ObjectId("651d52302586b932b508855f"),
+    productos: [
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc37"),
+        cantidad: 1,
+      },
+      {
+        productoId: ObjectId("651d526c7fd5b5bdaf7edc36"),
+        cantidad: 2,
+      },
+    ],
+    total: 399.97,
+    fecha: ISODate("2022-05-20T16:55:00Z"),
+    estado: "Entregado",
+  },
+]);
