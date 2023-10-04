@@ -12,6 +12,726 @@
     }
   ],
   "paths": {
+    "/Categorias/All": {
+      "get": {
+        "summary": "Get All Categoria",
+        "description": "Devuelve todos los Categoria de la Store",
+        "tags": ["Categorias"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Categoria"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontro el recurso solicitado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Categorias/New": {
+      "post": {
+        "summary": "Create new Categoria",
+        "description": "Creacion de una nueva Categoria",
+        "tags": ["Categorias"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categoria"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": { "msg": "Categoria Creado Exitosamente" }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo crear la Categoria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Categorias/Update/{_id}": {
+      "patch": {
+        "summary": "Update Categoria",
+        "description": "Actualizacion de una Categoria en la base de datos",
+        "tags": ["Categorias"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Categoria"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Category ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Categoria con ID:{id_de_ejemplo} Actualizado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Editar la Categoria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Categorias/Delete/{_id}": {
+      "delete": {
+        "summary": "Delete Categoria",
+        "description": "Eliminación de una Categoria en la base de datos",
+        "tags": ["Categorias"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Categoria ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Categoria con ID:{id_de_ejemplo} Eliminado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Eliminar la Categoria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Comentarios/All": {
+      "get": {
+        "summary": "Get All Comentario",
+        "description": "Devuelve todos los Comentarios de la Store",
+        "tags": ["Comentarios"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Comentario"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontro el recurso solicitado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Comentarios/New": {
+      "post": {
+        "summary": "Create new Usuario",
+        "description": "Creacion de un nuevo Comentario",
+        "tags": ["Comentarios"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comentario"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": { "msg": "Comentario Creado Exitosamente" }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo crear el Comentario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Comentarios/Update/{_id}": {
+      "patch": {
+        "summary": "Update Periferico",
+        "description": "Actualizacion de un Comentario en la base de datos",
+        "tags": ["Comentarios"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Comentario"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Comentario ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Comentario con ID:{id_de_ejemplo} Actualizado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Editar el Comentario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Comentarios/Delete/{_id}": {
+      "delete": {
+        "summary": "Delete Comentario",
+        "description": "Eliminación de un Comentario en la base de datos",
+        "tags": ["Comentarios"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Comentario ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Comentario con ID:{id_de_ejemplo} Eliminado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Eliminar el Comentario",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pedidos/All": {
+      "get": {
+        "summary": "Get All Pedidos",
+        "description": "Devuelve todos los Pedidos de la Store",
+        "tags": ["Pedidos"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Pedido"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontro el recurso solicitado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pedidos/New": {
+      "post": {
+        "summary": "Create new Pedido",
+        "description": "Creacion de un nuevo Pedido",
+        "tags": ["Pedidos"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pedido"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": { "msg": "Pedido Creado Exitosamente" }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo crear el Pedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pedidos/Update/{_id}": {
+      "patch": {
+        "summary": "Update Pedido",
+        "description": "Actualizacion de un Pedido en la base de datos",
+        "tags": ["Pedidos"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Pedido"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Pedido ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Pedido con ID:{id_de_ejemplo} Actualizado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Editar el Pedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Pedidos/Delete/{_id}": {
+      "delete": {
+        "summary": "Delete Pedido",
+        "description": "Eliminación de un Pedido en la base de datos",
+        "tags": ["Pedidos"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Pedido ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Pedido con ID:{id_de_ejemplo} Eliminado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Eliminar el Pedido",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Productos/All": {
+      "get": {
+        "summary": "Get All Productos",
+        "description": "Devuelve todos los Productos de la Store",
+        "tags": ["Productos"],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se encontro el recurso solicitado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Productos/New": {
+      "post": {
+        "summary": "Create new Producto",
+        "description": "Creacion de un nuevo Producto",
+        "tags": ["Productos"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Producto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": { "msg": "Producto Creado Exitosamente" }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo crear el Producto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Productos/Update/{_id}": {
+      "patch": {
+        "summary": "Update Producto",
+        "description": "Actualizacion de un Producto en la base de datos",
+        "tags": ["Productos"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Producto"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Producto ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Producto con ID:{id_de_ejemplo} Actualizado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Editar el Producto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Productos/Delete/{_id}": {
+      "delete": {
+        "summary": "Delete Producto",
+        "description": "Eliminación de un Producto en la base de datos",
+        "tags": ["Productos"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "_id",
+            "schema": {
+              "type": "string",
+              "example": "65121da10d7d333cbe4a3c47"
+            },
+            "description": "The Producto ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Producto con ID:{id_de_ejemplo} Eliminado Exitosamente"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No se puedo Eliminar el Producto",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "msg": "Faltan Datos"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/Usuarios/All": {
       "get": {
         "summary": "Get All Usuarios",
@@ -75,7 +795,7 @@
             }
           },
           "404": {
-            "description": "No se puedo crear el Periferico",
+            "description": "No se puedo crear el Usuario",
             "content": {
               "application/json": {
                 "schema": {
@@ -92,8 +812,8 @@
     },
     "/Usuarios/Update/{_id}": {
       "patch": {
-        "summary": "Update Periferico",
-        "description": "Actualizacion de un Periferico en la base de datos",
+        "summary": "Update Usuario",
+        "description": "Actualizacion de un Usuario en la base de datos",
         "tags": ["Usuarios"],
         "requestBody": {
           "required": true,
@@ -113,7 +833,7 @@
               "type": "string",
               "example": "65121da10d7d333cbe4a3c47"
             },
-            "description": "The Periferico ID"
+            "description": "The Usuario ID"
           }
         ],
         "responses": {
@@ -131,7 +851,7 @@
             }
           },
           "404": {
-            "description": "No se puedo Editar el Periferico",
+            "description": "No se puedo Editar el Usuario",
             "content": {
               "application/json": {
                 "schema": {
@@ -148,8 +868,8 @@
     },
     "/Usuarios/Delete/{_id}": {
       "delete": {
-        "summary": "Delete Periferico",
-        "description": "Un endpoint de prueba",
+        "summary": "Delete Usuarios",
+        "description": "Eliminación de un Usuario en la base de datos",
         "tags": ["Usuarios"],
         "parameters": [
           {
@@ -159,7 +879,7 @@
               "type": "string",
               "example": "65121da10d7d333cbe4a3c47"
             },
-            "description": "The Periferico ID"
+            "description": "The Usuarios ID"
           }
         ],
         "responses": {
@@ -177,7 +897,7 @@
             }
           },
           "404": {
-            "description": "No se puedo Eliminar el Periferico",
+            "description": "No se puedo Eliminar el Usuarios",
             "content": {
               "application/json": {
                 "schema": {
@@ -198,12 +918,6 @@
       "Categoria": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "651d52203ed714f7e6e37861",
-            "description": "ID único de la Categoria"
-          },
           "nombre": {
             "type": "string",
             "example": "Laptops",
@@ -219,12 +933,6 @@
       "Comentario": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "651d557149456e2091a2958e",
-            "description": "ID único del Comentario"
-          },
           "usuario": {
             "type": "string",
             "format": "uuid",
@@ -252,12 +960,6 @@
       "Pedido": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "651d5c37e77c1ca90d3d1b36",
-            "description": "ID único del Pedido"
-          },
           "usuario": {
             "type": "string",
             "format": "uuid",
@@ -306,12 +1008,6 @@
       "Producto": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "651d526c7fd5b5bdaf7edc35",
-            "description": "ID único del Producto"
-          },
           "nombre": {
             "type": "string",
             "example": "Teclado mecánico RGB",
@@ -343,12 +1039,6 @@
       "Usuario": {
         "type": "object",
         "properties": {
-          "_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "651d52302586b932b5088552",
-            "description": "ID único del Usuario"
-          },
           "nombre": {
             "type": "string",
             "example": "Ana Pérez",
