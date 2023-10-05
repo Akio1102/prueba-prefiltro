@@ -53,6 +53,7 @@ export default function TableHead({ collection }) {
         <tr className="text-white">
           <th>ID</th>
           <th>Nombre</th>
+          <th>Email</th>
           <th>Password</th>
           <th>Rol</th>
           <th>Telefono</th>

@@ -9,7 +9,7 @@ export const UsuariosContextProvider = (props) => {
   const getProductos = async () => {
     try {
       const res = await APIUSUARIOS.getUsuariosRequest();
-      setUsuarios(res);
+      setUsuarios(res.data.data);
     } catch (error) {
       console.error(error);
     }
