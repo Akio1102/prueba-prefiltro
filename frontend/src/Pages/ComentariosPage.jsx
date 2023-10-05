@@ -1,3 +1,5 @@
+import Table from "../Components/Table.jsx";
+
 export default function ComentariosPage() {
-  return <div>ComentariosPage</div>;
+  return <Table table="Comentarios" />;
 }

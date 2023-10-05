@@ -1,3 +1,5 @@
+import Table from "../Components/Table.jsx";
+
 export default function CategoriasPage() {
-  return <div>CategoriasPage</div>;
+  return <Table table="Categorias" />;
 }

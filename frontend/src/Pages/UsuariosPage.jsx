@@ -1,3 +1,5 @@
+import Table from "../Components/Table.jsx";
+
 export default function UsuariosPage() {
-  return <div>UsuariosPage</div>;
+  return <Table table="Usuarios" />;
 }

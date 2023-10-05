@@ -1,14 +1,5 @@
-import { useContext } from "react";
-import { ProductosContext } from "../Context/ProductosContext.jsx";
+import Table from "../Components/Table.jsx";
 
 export default function ProductosPage() {
-  const { Productos } = useContext(ProductosContext);
-
-  return (
-    <div>
-      {Productos.map((producto) => (
-        <p>{producto.nombre}</p>
-      ))}
-    </div>
-  );
+  return <Table table="Productos" />;
 }
