@@ -1,5 +1,5 @@
-import Table from "../Components/Table.jsx";
+import TablePedidos from "../Components/Tables/TablePedidos.jsx";
 
 export default function PedidosPage() {
-  return <Table table="Pedidos" />;
+  return <TablePedidos />;
 }

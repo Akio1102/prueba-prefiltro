@@ -1,5 +1,5 @@
-import Table from "../Components/Table.jsx";
+import TableUsuarios from "../Components/Tables/TableUsuarios.jsx";
 
 export default function UsuariosPage() {
-  return <Table table="Usuarios" />;
+  return <TableUsuarios />;
 }

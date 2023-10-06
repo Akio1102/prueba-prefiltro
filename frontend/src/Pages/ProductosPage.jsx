@@ -1,5 +1,5 @@
-import Table from "../Components/Table.jsx";
+import TableProductos from "../Components/Tables/TableProductos.jsx";
 
 export default function ProductosPage() {
-  return <Table table="Productos" />;
+  return <TableProductos />;
 }
