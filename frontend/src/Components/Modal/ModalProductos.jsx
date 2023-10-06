@@ -1,4 +1,26 @@
+import { useContext } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { MainContext } from "../../Context/MainContext.jsx";
+
 export default function ModalProductos() {
+  const queryClient = useQueryClient();
+  const { createProducto } = useContext(MainContext);
+  const addProductoMutation = useMutation({
+    mutationFn: createProducto,
+    onSuccess: () => {
+      console.log("Add Product");
+      queryClient.invalidateQueries("productos");
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formdata = new FormData(e.target);
+    const newProducto = Object.fromEntries(formdata);
+    console.log(newProducto);
+    addProductoMutation.mutate(newProducto);
+  };
+
   return (
     <div className="flex justify-center">
       <article>
@@ -23,12 +45,13 @@ export default function ModalProductos() {
             </div>
 
             <section>
-              <form className="form-group">
+              <form className="form-group" onSubmit={handleSubmit}>
                 <div className="form-field">
                   <label className="form-label">Nombre del Producto</label>
                   <input
                     placeholder="Escriba el Nombre del Productos"
                     type="text"
+                    name="nombre"
                     className="input max-w-full"
                     required
                   />
@@ -39,13 +62,18 @@ export default function ModalProductos() {
                   <textarea
                     placeholder="Ingrese la Descripción del Producto"
                     className="textarea max-w-full h-32"
+                    name="descripcion"
                     required
                   />
                 </div>
 
                 <div className="form-field">
                   <label className="form-label">Categoria del Producto</label>
-                  <select className="select max-w-full" required>
+                  <select
+                    className="select max-w-full"
+                    name="categoria"
+                    required
+                  >
                     <option>Option 1</option>
                     <option>Option 2</option>
                     <option>Option 3</option>
@@ -56,7 +84,8 @@ export default function ModalProductos() {
                   <label className="form-label">Precio del Producto</label>
                   <input
                     placeholder="Escriba el Precio del Productos"
-                    type="text"
+                    type="number"
+                    name="precio"
                     className="input max-w-full"
                     required
                   />
@@ -66,7 +95,8 @@ export default function ModalProductos() {
                   <label className="form-label">Stock del Producto</label>
                   <input
                     placeholder="Escriba el Stock del Productos"
-                    type="text"
+                    type="number"
+                    name="stock"
                     className="input max-w-full"
                     required
                   />

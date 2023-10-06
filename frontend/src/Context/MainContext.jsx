@@ -122,6 +122,7 @@ export const MainContextProvider = ({ children }) => {
     try {
       const res = await APIPRODUCTOS.getProductosRequest();
       setProductos(res.data.data);
+      return res.data.data;
     } catch (error) {
       console.error(error);
     }
