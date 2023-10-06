@@ -1,15 +1,43 @@
-import { useContext } from "react";
+import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { MainContext } from "../../Context/MainContext.jsx";
+import { postProductosRequest } from "../../Api/Productos.js";
+import { toast } from "react-toastify";
 
 export default function ModalProductos() {
   const queryClient = useQueryClient();
-  const { createProducto } = useContext(MainContext);
+  const [formValues, setFormValues] = useState({
+    nombre: "",
+    descripcion: "",
+    categoria: "",
+    precio: "",
+    stock: "",
+  });
+
+  const notify = () => {
+    toast.success("Producto Agregado Exitosamente", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
   const addProductoMutation = useMutation({
-    mutationFn: createProducto,
+    mutationFn: postProductosRequest,
     onSuccess: () => {
-      console.log("Add Product");
       queryClient.invalidateQueries("productos");
+      setFormValues({
+        nombre: "",
+        descripcion: "",
+        categoria: "",
+        precio: "",
+        stock: "",
+      });
+      notify();
     },
   });
 
@@ -17,8 +45,19 @@ export default function ModalProductos() {
     e.preventDefault();
     const formdata = new FormData(e.target);
     const newProducto = Object.fromEntries(formdata);
-    console.log(newProducto);
     addProductoMutation.mutate(newProducto);
+    const modalCheckbox = document.getElementById("modal-1");
+    if (modalCheckbox) {
+      modalCheckbox.checked = false;
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
   };
 
   return (
@@ -49,11 +88,13 @@ export default function ModalProductos() {
                 <div className="form-field">
                   <label className="form-label">Nombre del Producto</label>
                   <input
-                    placeholder="Escriba el Nombre del Productos"
+                    placeholder="Escriba el Nombre del Producto"
                     type="text"
                     name="nombre"
                     className="input max-w-full"
                     required
+                    value={formValues.nombre}
+                    onChange={handleInputChange}
                   />
                 </div>
 
@@ -64,6 +105,8 @@ export default function ModalProductos() {
                     className="textarea max-w-full h-32"
                     name="descripcion"
                     required
+                    value={formValues.descripcion}
+                    onChange={handleInputChange}
                   />
                 </div>
 
@@ -73,6 +116,8 @@ export default function ModalProductos() {
                     className="select max-w-full"
                     name="categoria"
                     required
+                    value={formValues.categoria}
+                    onChange={handleInputChange}
                   >
                     <option>Option 1</option>
                     <option>Option 2</option>
@@ -88,6 +133,8 @@ export default function ModalProductos() {
                     name="precio"
                     className="input max-w-full"
                     required
+                    value={formValues.precio}
+                    onChange={handleInputChange}
                   />
                 </div>
 
@@ -99,6 +146,8 @@ export default function ModalProductos() {
                     name="stock"
                     className="input max-w-full"
                     required
+                    value={formValues.stock}
+                    onChange={handleInputChange}
                   />
                 </div>
 

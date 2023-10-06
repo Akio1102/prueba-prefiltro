@@ -1,17 +1,34 @@
-import { useContext } from "react";
 import { useMutation, useQueryClient } from "react-query";
-import { MainContext } from "../../Context/MainContext";
+import { deleteProductosRequest } from "../../Api/Productos.js";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function TrProductos({ producto, index }) {
   const queryClient = useQueryClient();
-  const { deleteProducto } = useContext(MainContext);
+
+  const notify = () => {
+    toast.error("Producto Eliminado Exitosamente", {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
 
   const deleteProductoMutate = useMutation({
-    mutationFn: deleteProducto,
+    mutationFn: deleteProductosRequest,
     onSuccess: () => {
       queryClient.invalidateQueries("productos");
     },
   });
+
+  const deleteProduct = () => {
+    deleteProductoMutate.mutate(producto._id);
+    notify();
+  };
 
   return (
     <tr>
@@ -23,12 +40,12 @@ export default function TrProductos({ producto, index }) {
       <th>{producto.stock} </th>
       <th className="flex gap-3">
         <button className="btn btn-outline-warning">Editar</button>
-        <button
-          className="btn btn-outline-error"
-          onClick={() => deleteProductoMutate.mutate(producto._id)}
-        >
+        <button className="btn btn-outline-error" onClick={deleteProduct}>
           Eliminar
         </button>
+      </th>
+      <th>
+        <ToastContainer />
       </th>
     </tr>
   );

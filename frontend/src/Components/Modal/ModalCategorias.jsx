@@ -1,4 +1,59 @@
+import { useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
+import { postCategoriasRequest } from "../../Api/Categorias.js";
+import { toast } from "react-toastify";
+
 export default function ModalCategorias() {
+  const queryClient = useQueryClient();
+  const [formValues, setFormValues] = useState({
+    nombre: "",
+    descripcion: "",
+  });
+
+  const notify = () => {
+    toast.success("Categoria Agregado Exitosamente", {
+      position: "bottom-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
+  const addCategoriaMutation = useMutation({
+    mutationFn: postCategoriasRequest,
+    onSuccess: () => {
+      queryClient.invalidateQueries("categorias");
+      setFormValues({
+        nombre: "",
+        descripcion: "",
+      });
+      notify();
+    },
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formdata = new FormData(e.target);
+    const newCategoria = Object.fromEntries(formdata);
+    addCategoriaMutation.mutate(newCategoria);
+    const modalCheckbox = document.getElementById("modal-1");
+    if (modalCheckbox) {
+      modalCheckbox.checked = false;
+    }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
   return (
     <div className="flex justify-center">
       <article>
@@ -23,14 +78,17 @@ export default function ModalCategorias() {
             </div>
 
             <section>
-              <form className="form-group">
+              <form className="form-group" onSubmit={handleSubmit}>
                 <div className="form-field">
                   <label className="form-label">Nombre de la Categoria</label>
                   <input
                     placeholder="Escriba el Nombre de la Categorias"
                     type="text"
                     className="input max-w-full"
+                    name="nombre"
                     required
+                    value={formValues.nombre}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="form-field">
@@ -40,7 +98,10 @@ export default function ModalCategorias() {
                   <textarea
                     placeholder="Ingrese la Descripción de la Categoria"
                     className="textarea max-w-full h-32"
+                    name="descripcion"
                     required
+                    value={formValues.descripcion}
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="form-field pt-5">

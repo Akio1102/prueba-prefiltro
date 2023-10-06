@@ -1,12 +1,34 @@
 import axios from "./axios.js";
 
-export const getProductosRequest = () => axios.get("/Productos/All");
+export const getProductosRequest = async () => {
+  try {
+    const res = await axios.get("/Productos/All");
+    return res.data.data;
+  } catch (error) {
+    throw new Error(`Error: ${error.message}`);
+  }
+};
 
-export const postProductosRequest = (producto) =>
-  axios.post("/Productos/New", producto);
+export const postProductosRequest = async (producto) => {
+  try {
+    await axios.post("/Productos/New", producto);
+  } catch (error) {
+    throw new Error(`Error: ${error.message}`);
+  }
+};
 
-export const patchProductosRequest = (id, producto) =>
-  axios.patch(`/Productos/Update/${id}`, producto);
+export const patchProductosRequest = async (id, producto) => {
+  try {
+    await axios.patch(`/Productos/Update/${id}`, producto);
+  } catch (error) {
+    throw new Error(`Error: ${error.message}`);
+  }
+};
 
-export const deleteProductosRequest = (id) =>
-  axios.delete(`/Productos/Delete/${id}`);
+export const deleteProductosRequest = async (id) => {
+  try {
+    await axios.delete(`/Productos/Delete/${id}`);
+  } catch (error) {
+    throw new Error(`Error: ${error.message}`);
+  }
+};

@@ -1,29 +1,42 @@
-import { useContext } from "react";
-import { MainContext } from "../../Context/MainContext.jsx";
 import { useQuery } from "react-query";
+import { getProductosRequest } from "../../Api/Productos.js";
 import TrProductos from "../Tr/TrProductos.jsx";
 
 export default function BodyProductos() {
-  const { getProductos } = useContext(MainContext);
   const {
     isLoading,
-    data: productos,
+    data: Productos,
     isError,
     error,
   } = useQuery({
     queryKey: ["productos"],
-    queryFn: getProductos,
+    queryFn: getProductosRequest,
     refetchOnWindowFocus: false,
   });
 
   if (isLoading) {
-    return <div>Loading....</div>;
+    return (
+      <tbody>
+        <tr>
+          <td colSpan="7" className="text-3xl">
+            <div className="skeleton h-40 rounded-md text-center p-16 text-2xl">
+              Loading....
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    );
   } else if (isError) {
-    <div>Error: {error.message}</div>;
+    <tbody>
+      <tr>
+        <td colSpan="3">Error: {error.message}</td>
+      </tr>
+    </tbody>;
   }
+
   return (
     <tbody>
-      {productos.map((producto, index) => (
+      {Productos.map((producto, index) => (
         <TrProductos producto={producto} index={index} key={index + 1} />
       ))}
     </tbody>

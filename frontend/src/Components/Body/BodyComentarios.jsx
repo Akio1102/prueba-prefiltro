@@ -1,13 +1,24 @@
-import { useContext, useEffect } from "react";
-import { MainContext } from "../../Context/MainContext.jsx";
+import { useQuery } from "react-query";
+import { getComentariosRequest } from "../../Api/Comentarios.js";
 import TrComentarios from "../Tr/TrComentarios.jsx";
 
 export default function BodyComentarios() {
-  const { Comentarios, getComentarios } = useContext(MainContext);
+  const {
+    isLoading,
+    data: Comentarios,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["comentarios"],
+    queryFn: getComentariosRequest,
+    refetchOnWindowFocus: false,
+  });
 
-  useEffect(() => {
-    getComentarios();
-  }, []);
+  if (isLoading) {
+    return <div className="text-3xl">Loading....</div>;
+  } else if (isError) {
+    <div>Error: {error.message}</div>;
+  }
 
   return (
     <tbody>

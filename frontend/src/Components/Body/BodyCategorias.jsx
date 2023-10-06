@@ -1,13 +1,24 @@
-import { useContext, useEffect } from "react";
-import { MainContext } from "../../Context/MainContext.jsx";
+import { useQuery } from "react-query";
+import { getCategoriasRequest } from "../../Api/Categorias.js";
 import TrCategorias from "../Tr/TrCategorias.jsx";
 
 export default function BodyCategorias() {
-  const { Categorias, getCategorias } = useContext(MainContext);
+  const {
+    isLoading,
+    data: Categorias,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["categorias"],
+    queryFn: getCategoriasRequest,
+    refetchOnWindowFocus: false,
+  });
 
-  useEffect(() => {
-    getCategorias();
-  }, []);
+  if (isLoading) {
+    return <div className="text-3xl">Loading....</div>;
+  } else if (isError) {
+    <div>Error: {error.message}</div>;
+  }
 
   return (
     <tbody>
