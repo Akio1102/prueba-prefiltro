@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient, useQuery } from "react-query";
 import { postComentariosRequest } from "../../Api/Comentarios.js";
+import { getUsuariosRequest } from "../../Api/Usuarios.js";
+import { getProductosRequest } from "../../Api/Productos.js";
 import { toast } from "react-toastify";
 
 export default function ModalComentarios() {
@@ -24,6 +26,18 @@ export default function ModalComentarios() {
       theme: "dark",
     });
   };
+
+  const { isLoading: LoadingUser, data: Usuarios } = useQuery({
+    queryKey: ["usuarios"],
+    queryFn: getUsuariosRequest,
+    refetchOnWindowFocus: false,
+  });
+
+  const { isLoading: LoadingProducts, data: Productos } = useQuery({
+    queryKey: ["productos"],
+    queryFn: getProductosRequest,
+    refetchOnWindowFocus: false,
+  });
 
   const addComentarioMutation = useMutation({
     mutationFn: postComentariosRequest,
@@ -92,9 +106,16 @@ export default function ModalComentarios() {
                     value={formValues.usuario}
                     onChange={handleInputChange}
                   >
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
+                    <option value="">Selecciona una Usuario</option>
+                    {LoadingUser ? (
+                      <option>Cargando...</option>
+                    ) : (
+                      Usuarios.map((usuario) => (
+                        <option key={usuario._id} value={usuario._id}>
+                          {usuario.nombre}
+                        </option>
+                      ))
+                    )}
                   </select>
                 </div>
 
@@ -107,9 +128,16 @@ export default function ModalComentarios() {
                     value={formValues.producto}
                     onChange={handleInputChange}
                   >
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
+                    <option value="">Selecciona una Producto</option>
+                    {LoadingProducts ? (
+                      <option>Cargando...</option>
+                    ) : (
+                      Productos.map((producto) => (
+                        <option key={producto._id} value={producto._id}>
+                          {producto.nombre}
+                        </option>
+                      ))
+                    )}
                   </select>
                 </div>
 

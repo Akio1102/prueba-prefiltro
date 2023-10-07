@@ -30,18 +30,12 @@ export default function TrPedidos({ pedido, index }) {
     notify();
   };
 
-  const productosList = pedido.productos.map((producto, prodIndex) => (
-    <li key={prodIndex}>
-      Producto ID: {producto.productoId}, Cantidad: {producto.cantidad}
-    </li>
-  ));
-
   return (
     <tr>
       <th># {index + 1}</th>
       <th>{pedido.usuario}</th>
       <th>
-        <ul>{productosList}</ul>
+        <ul>Cantidad: {pedido.productos.length}</ul>
       </th>
       <th>${pedido.total}</th>
       <th>{new Date(pedido.fecha).toLocaleDateString()}</th>

@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient, useQuery } from "react-query";
 import { postProductosRequest } from "../../Api/Productos.js";
+import { getCategoriasRequest } from "../../Api/Categorias.js";
 import { toast } from "react-toastify";
 
 export default function ModalProductos() {
@@ -25,6 +26,12 @@ export default function ModalProductos() {
       theme: "dark",
     });
   };
+
+  const { isLoading, data: Categorias } = useQuery({
+    queryKey: ["categorias"],
+    queryFn: getCategoriasRequest,
+    refetchOnWindowFocus: false,
+  });
 
   const addProductoMutation = useMutation({
     mutationFn: postProductosRequest,
@@ -119,9 +126,16 @@ export default function ModalProductos() {
                     value={formValues.categoria}
                     onChange={handleInputChange}
                   >
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
+                    <option value="">Selecciona una categoría</option>
+                    {isLoading ? (
+                      <option>Cargando...</option>
+                    ) : (
+                      Categorias.map((categoria) => (
+                        <option key={categoria._id} value={categoria.nombre}>
+                          {categoria.nombre}
+                        </option>
+                      ))
+                    )}
                   </select>
                 </div>
 

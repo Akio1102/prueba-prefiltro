@@ -20,6 +20,26 @@ export default function BodyCategorias() {
     <div>Error: {error.message}</div>;
   }
 
+  if (isLoading) {
+    return (
+      <tbody>
+        <tr>
+          <td colSpan="4" className="text-3xl">
+            <div className="skeleton h-40 rounded-md text-center p-16 text-2xl">
+              Loading....
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    );
+  } else if (isError) {
+    <tbody>
+      <tr>
+        <td colSpan="4">Error: {error.message}</td>
+      </tr>
+    </tbody>;
+  }
+
   return (
     <tbody>
       {Categorias.map((categoria, index) => (

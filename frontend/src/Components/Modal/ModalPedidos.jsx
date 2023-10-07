@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient, useQuery } from "react-query";
 import { postPedidosRequest } from "../../Api/Pedidos.js";
+import { getUsuariosRequest } from "../../Api/Usuarios.js";
+import { getProductosRequest } from "../../Api/Productos.js";
 import { toast } from "react-toastify";
 
 export default function ModalPedidos() {
@@ -26,26 +28,40 @@ export default function ModalPedidos() {
     });
   };
 
-  const addPedidoMutation = useMutation({
-    mutationFn: postPedidosRequest,
+  const { isLoading: loadingUsuarios, data: usuarios } = useQuery({
+    queryKey: ["usuarios"],
+    queryFn: getUsuariosRequest,
+    refetchOnWindowFocus: false,
+  });
+
+  const { isLoading: loadingProductos, data: productos } = useQuery({
+    queryKey: ["productos"],
+    queryFn: getProductosRequest,
+    refetchOnWindowFocus: false,
+  });
+
+  const addPedidoMutation = useMutation(postPedidosRequest, {
     onSuccess: () => {
       queryClient.invalidateQueries("pedidos");
-      setFormValues({
+      setFormValues((prevValues) => ({
+        ...prevValues,
         usuario: "",
         productos: [],
         total: 0,
         fecha: "",
         estado: "",
-      });
+      }));
       notify();
+    },
+    onError: (error) => {
+      console.error("Error al agregar pedido:", error);
     },
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formdata = new FormData(e.target);
-    const newPedido = Object.fromEntries(formdata);
-    addPedidoMutation.mutate(newPedido);
+    console.log(formValues);
+    addPedidoMutation.mutate(formValues);
     const modalCheckbox = document.getElementById("modal-1");
     if (modalCheckbox) {
       modalCheckbox.checked = false;
@@ -53,10 +69,18 @@ export default function ModalPedidos() {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, options } = e.target;
+    let newValue = value;
+
+    if (name === "productos") {
+      newValue = Array.from(options)
+        .filter((option) => option.selected)
+        .map((option) => option.value);
+    }
+
     setFormValues((prevValues) => ({
       ...prevValues,
-      [name]: value,
+      [name]: newValue,
     }));
   };
 
@@ -94,50 +118,39 @@ export default function ModalPedidos() {
                     value={formValues.usuario}
                     onChange={handleInputChange}
                   >
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                    <option>Option 3</option>
+                    <option value="">Selecciona un Usuario</option>
+                    {loadingUsuarios ? (
+                      <option>Cargando...</option>
+                    ) : (
+                      usuarios.map((usuario) => (
+                        <option key={usuario._id} value={usuario._id}>
+                          {usuario.nombre}
+                        </option>
+                      ))
+                    )}
                   </select>
                 </div>
 
                 <div className="form-field">
-                  <label className="form-label">Producto del Pedido</label>
-                  <div className="flex flex-wrap gap-2">
-                    <label className="flex cursor-pointer gap-2">
-                      <input
-                        type="checkbox"
-                        className="checkbox"
-                        name="productos"
-                        value={formValues.productos}
-                        onChange={handleInputChange}
-                      />
-                      <span>Maps Productos</span>
-                    </label>
-                    <label className="flex cursor-pointer gap-2">
-                      <input type="checkbox" className="checkbox" />
-                      <span>Maps Productos</span>
-                    </label>
-                    <label className="flex cursor-pointer gap-2">
-                      <input type="checkbox" className="checkbox" />
-                      <span>Maps Productos</span>
-                    </label>
-                    <label className="flex cursor-pointer gap-2">
-                      <input type="checkbox" className="checkbox" />
-                      <span>Maps Productos</span>
-                    </label>
-                    <label className="flex cursor-pointer gap-2">
-                      <input type="checkbox" className="checkbox" />
-                      <span>Maps Productos</span>
-                    </label>
-                    <label className="flex cursor-pointer gap-2">
-                      <input type="checkbox" className="checkbox" />
-                      <span>Maps Productos</span>
-                    </label>
-                    <label className="flex cursor-pointer gap-2">
-                      <input type="checkbox" className="checkbox" />
-                      <span>Maps Productos</span>
-                    </label>
-                  </div>
+                  <label className="form-label">Productos del Pedido</label>
+                  <select
+                    className="select max-w-full h-32"
+                    name="productos"
+                    required
+                    multiple
+                    value={formValues.productos}
+                    onChange={handleInputChange}
+                  >
+                    {loadingProductos ? (
+                      <option>Cargando...</option>
+                    ) : (
+                      productos.map((producto) => (
+                        <option key={producto._id} value={producto._id}>
+                          {producto.nombre}
+                        </option>
+                      ))
+                    )}
+                  </select>
                 </div>
 
                 <div className="form-field">
@@ -157,7 +170,7 @@ export default function ModalPedidos() {
                 <div className="form-field">
                   <label className="form-label">Fecha del Pedido</label>
                   <input
-                    placeholder="Escriba el Total del Pedido"
+                    placeholder="Escriba la Fecha del Pedido"
                     type="date"
                     className="input max-w-full"
                     name="fecha"
@@ -169,18 +182,17 @@ export default function ModalPedidos() {
 
                 <div className="form-field">
                   <label className="form-label">Estado del Pedido</label>
-                  <div className="flex gap-3">
-                    <input
-                      placeholder="Escriba el Total del Pedido"
-                      type="checkbox"
-                      className="input max-w-full switch"
-                      name="estado"
-                      required
-                      value={formValues.estado}
-                      onChange={handleInputChange}
-                    />
-                    <span>Entregado</span>
-                  </div>
+                  <select
+                    className="select max-w-full"
+                    name="estado"
+                    required
+                    value={formValues.estado}
+                    onChange={handleInputChange}
+                  >
+                    <option value="">Seleecione el Estado del Pedido</option>
+                    <option value="Entregado">Entregado</option>
+                    <option value="Pendiente">Pendiente</option>
+                  </select>
                 </div>
                 <div className="form-field pt-5">
                   <div className="form-control justify-between">

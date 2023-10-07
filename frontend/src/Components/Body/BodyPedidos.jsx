@@ -15,9 +15,23 @@ export default function BodyPedidos() {
   });
 
   if (isLoading) {
-    return <div className="text-3xl">Loading....</div>;
+    return (
+      <tbody>
+        <tr>
+          <td colSpan="7" className="text-3xl">
+            <div className="skeleton h-40 rounded-md text-center p-16 text-2xl">
+              Loading....
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    );
   } else if (isError) {
-    <div>Error: {error.message}</div>;
+    <tbody>
+      <tr>
+        <td colSpan="7">Error: {error.message}</td>
+      </tr>
+    </tbody>;
   }
 
   return (

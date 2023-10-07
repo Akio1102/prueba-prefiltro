@@ -29,7 +29,9 @@ export default function BodyProductos() {
   } else if (isError) {
     <tbody>
       <tr>
-        <td colSpan="3">Error: {error.message}</td>
+        <td colSpan="7" className="text-3xl">
+          Error: {error.message}
+        </td>
       </tr>
     </tbody>;
   }
